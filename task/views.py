@@ -12,7 +12,7 @@ from task.selectors import get_note
 
 @login_required(login_url="/auth/login/")
 def home(request: HttpRequest) -> HttpResponse:
-    todos = Todo.objects.only("title", "description")
+    todos = Todo.objects.only("title", "description").filter(user=request.user)
     return render(request, "task/list-tasks.html", {"todos": todos})
 
 
@@ -23,7 +23,10 @@ def create_todo(request: HttpRequest):
     if request.method == "POST":
         form = TodoForm(request.POST)
         if form.is_valid():
-            form.save()
+            todo = form.save(commit=False)
+            todo.user = request.user
+            todo.save()
+
             messages.success(request, "Successfully created todo!")
             return redirect("task:home")
 
@@ -34,14 +37,14 @@ def create_todo(request: HttpRequest):
 
 
 @login_required(login_url="/auth/login/")
-def view_note(request, pk: int) -> HttpResponse:
-    note = get_note(pk)
+def view_note(request: HttpRequest, pk: int) -> HttpResponse:
+    note = get_note(pk, request.user)
     return render(request, "task/view-note.html", {"note": note, "pk": pk})
 
 
 @login_required(login_url="/auth/login/")
-def update_note(request, pk):
-    note = get_note(pk)
+def update_note(request: HttpRequest, pk: int):
+    note = get_note(pk, request.user)
     form = TodoForm(instance=note)
 
     if request.method == "POST":
@@ -59,7 +62,7 @@ def update_note(request, pk):
 
 @login_required(login_url="/auth/login/")
 def delete_note(request: HttpRequest, pk: int):
-    todo = get_note(pk)
+    todo = get_note(pk, request.user)
     todo.delete()
 
     messages.success(request, "Successfully deleted todo!")

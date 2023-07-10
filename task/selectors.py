@@ -1,11 +1,12 @@
 # Django Imports
 from django.http import Http404
+from django.contrib.auth.models import User
 
 # Own Imports
 from task.models import Todo
 
 
-def get_note(note_id: int) -> Todo:
+def get_note(note_id: int, user: User) -> Todo:
     """
     This selector function raises a 404 exception
     if a note is not found, otherwise return the note.
@@ -17,7 +18,7 @@ def get_note(note_id: int) -> Todo:
     :rtype: Todo
     """
     try:
-        note = Todo.objects.get(id=note_id)
+        note = Todo.objects.get(id=note_id, user=user)
     except Todo.DoesNotExist:
         raise Http404("Not does not exist!")
     return note
