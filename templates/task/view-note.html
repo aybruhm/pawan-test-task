@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container"><br><br><br>
+    <div class="container">
+        <main class="role">
+            <h3 class="cursive">
+                {{ note.title }} - {% if note.completed %} <span class="badge badge-success">completed</span> {% else %} <span class="badge badge-secondary">not completed</span> {% endif %}
+            </h3>
+            <p class="text-muted">
+                {{ note.description }}
+            </p>
+        </main>
+    </div>
+    <hr>
+
+    <div class="container inline-group">
+        <a href="{% url 'task:delete_note' pk %}" class="btn btn-danger float-right" style="margin: 0px 3px;">Delete</a>
+        <a href="{% url 'task:edit_note' pk %}" class="btn btn-warning float-right" style="color: white;">Edit</a>
+    </div>
+</div>
+{% endblock %}

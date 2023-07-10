@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <br><br><br>
+    <div class="container">
+        <main class="role">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <hr>
+
+            {% for todo in todos %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a href="{% url 'task:view_note' todo.id %}" style="text-decoration-color: #6c757d!important;">
+                            <h2 class="text-secondary text-underline-secondary">{{ todo.title }}</h2>
+                        </a>
+                        <span class="mr-1" style="font-size: 18px;">{{ todo.description }}</span>
+                        <small class="text-muted">{{ todo.date_created }}</small>
+                    </div>
+                </div>
+            </article>
+            <hr>
+            {% endfor %}
+            <br>
+        </main>
+    </div>
+    <br>
+
+    <div class="container">
+        <a href="{% url 'task:create_note' %}" class="btn btn-dark btn-fill float-right" style="color: white;">Add</a>
+    </div>
+
+</div>
+{% endblock %}

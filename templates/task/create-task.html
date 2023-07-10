@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container"><br><br><br>
+    <form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        {% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="alert alert-error"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+        <div class="col-12 mb-4">
+			<label for="username">Title of Note:</label>
+            {{ form.title }}
+        </div>
+        
+        <div class="col-12">
+			<label for="username">Description of Note:</label>
+            {{ form.description }}
+        </div>
+        </div><br><br>
+
+        <button type="submit" class="btn btn-outline-light bg-primary">Create Note</button>
+    </div>
+    </form>
+</div>
+{% endblock %}

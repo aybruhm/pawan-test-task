@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container"><br><br><br>
+    <form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 mb-4">
+			<label for="username">Title of Note:</label>
+            {{ form.title }}
+        </div>
+        
+        <div class="col-12 mb-4">
+			<label for="username">Description of Note:</label>
+            {{ form.description }}
+        </div>
+
+        <div class="col-12">
+            <label for="completed">
+            Completed: 
+            {{ form.completed }}
+            </label>
+        </div>
+        </div><br><br>
+
+        <button type="submit" class="btn btn-outline-light bg-warning">Update Note</button>
+    
+    </div>
+    </form>
+</div>
+{% endblock %}
