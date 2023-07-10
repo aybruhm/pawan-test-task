@@ -13,6 +13,43 @@ Create a simple TODO list application using Django. The application should have 
 
 Publish the code in public github repo and send me the link.
 
+## Get Started
+
+To get it running on your local machine, follow the steps below:
+
+1. Run the commands below in your terminal:
+
+```bash
+git clone https://github.com/aybruhm/pawan-test-task.git
+```
+
+2. Change directory to pawan-test-task:
+
+```bash
+cd pawan-test-task
+```
+
+3. Create virtual environment, activate and install the requirements with the command below:
+
+```bash
+python3.x -m virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+4. Run the development server with
+
+```bash
+python manage.py runserver
+```
+
+5. Launch your browser and navigate to:
+
+```bash
+http://127.0.0.1:8000
+```
+
+
 ## Admin Credentials
 
 username: admin
