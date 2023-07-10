@@ -3,6 +3,8 @@ from django.db import models
 
 
 class Todo(models.Model):
+    """Database schema for todos table."""
+
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=600)
     completed = models.BooleanField(default=False)
