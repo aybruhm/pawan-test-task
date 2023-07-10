@@ -12,3 +12,8 @@ Create a simple TODO list application using Django. The application should have 
 * Admin Panel: There should be an admin panel accessible only to superusers. Superusers should be able to manage TODO items through the admin panel.
 
 Publish the code in public github repo and send me the link.
+
+## Admin Credentials
+
+username: admin
+password: admin
