@@ -1,3 +1,11 @@
+# Django Imports
 from django.contrib import admin
 
-# Register your models here.
+# Own Imports
+from task.models import Todo
+
+
+@admin.register(Todo)
+class TodoAdmin(admin.ModelAdmin):
+    list_display = ("title", "completed", "date_created")
+    list_filter = ("completed", "date_created")
