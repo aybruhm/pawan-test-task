@@ -1,0 +1,31 @@
+{% extends 'accounts/auth-base.html' %}
+
+{% block content %}
+<div class="container"><br><br><br>
+    <form method="POST">
+		{% csrf_token %}
+		<div class="row">
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li{% if message.tags %} class="alert alert-warning"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+
+			<div class="col-12 mb-4">
+				<label for="username">Enter Username:</label>
+				{{ form.username }}
+			</div>
+			<div class="col-12">
+				<label for="password">Enter Password:</label>
+				{{ form.password }}
+			</div>
+			</div><br><br>
+			<div class="col-12">
+				<button type="submit" class="btn btn-outline-light bg-success w-100">Register</button>
+			</div>
+		</div>
+    </form>
+</div>
+{% endblock %}
