@@ -52,5 +52,6 @@ http://127.0.0.1:8000
 
 ## Admin Credentials
 
-username: admin
-password: admin
+username: admin <br>
+password: admin <br>
+url: http://localhost:8000/admin/

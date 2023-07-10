@@ -22,8 +22,7 @@
                         <a href="{% url 'task:view_note' todo.id %}" style="text-decoration-color: #6c757d!important;">
                             <h2 class="text-secondary text-underline-secondary">{{ todo.title }}</h2>
                         </a>
-                        <span class="mr-1" style="font-size: 18px;">{{ todo.description }}</span>
-                        <small class="text-muted">{{ todo.date_created }}</small>
+                        {% if note.completed %} <span class="badge badge-success">completed</span> {% else %} <span class="badge badge-secondary">not completed</span> {% endif %}
                     </div>
                 </div>
             </article>
