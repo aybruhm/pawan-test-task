@@ -29,6 +29,41 @@
             <hr>
             {% endfor %}
             <br>
+
+            <!-- Pagination -->
+            {% if todos.has_other_pages %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if todos.has_previous %}
+                        <li class="page-item"><a href="?page={{ todos.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                        <li class="page-item disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% for i in todos.paginator.page_range %}
+                        {% if todos.number == i %}
+                            <li class="active page-item">
+                                <span>{{ i }}<span class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            <li><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if todos.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ todos.next_page_number }}" class="page-link">&raquo;</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span>&raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+              <!-- End of Pagination -->
+
         </main>
     </div>
     <br>

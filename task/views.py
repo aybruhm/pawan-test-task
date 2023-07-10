@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Own Imports
 from task.models import Todo
@@ -12,8 +13,25 @@ from task.selectors import get_note
 
 @login_required(login_url="/auth/login/")
 def home(request: HttpRequest) -> HttpResponse:
-    todos = Todo.objects.only("title", "description").filter(user=request.user)
-    return render(request, "task/list-tasks.html", {"todos": todos})
+    todo_list = Todo.objects.only("title", "description").filter(
+        user=request.user
+    )
+
+    paginator = Paginator(todo_list, 2)
+    page = request.GET.get("page", 1)
+
+    try:
+        todos = paginator.page(page)
+    except PageNotAnInteger:
+        todos = paginator.page(1)
+    except EmptyPage:
+        todos = paginator.page(paginator.num_pages)
+
+    return render(
+        request,
+        "task/list-tasks.html",
+        {"todos": todos, "page": page},
+    )
 
 
 @login_required(login_url="/auth/login/")
